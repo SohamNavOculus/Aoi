@@ -1,0 +1,777 @@
+1. Project Overview
+
+Build a polished, mobile-first web application that combines a minimal messaging app with an ongoing, slice-of-life anime-style conversational experience and an adaptive Japanese-learning environment.
+
+This is a personal project built primarily for its creator's own use, with the eventual intention of publishing the source code on GitHub and deploying the application through Vercel.
+
+The core idea is simple:
+
+The user learns Japanese by having an ongoing conversation with a consistent fictional character, rather than by completing conventional language lessons.
+
+The experience should feel like opening a private chat with someone whose personality, interests, humour, and conversational history develop naturally over time.
+
+The educational component must be seamlessly integrated into the conversation. The application must not feel like a chatbot wearing a messaging-app costume or a language-learning application pretending to be a friend.
+
+The character is a fictional female friend. Her gender and personality are part of the application's character design, not a claim that the AI is a real person.
+
+The application's defining qualities are:
+
+- Natural, engaging conversation.
+- Consistent characterisation.
+- English-first interaction that gradually incorporates Japanese.
+- Adaptation to the user's demonstrated Japanese proficiency.
+- Persistent conversational continuity.
+- A beautiful, minimal messaging interface.
+- An architecture that can eventually support proactive messages and notifications.
+
+Build a functioning application, not a static prototype.
+
+2. Existing UI and Design Constraints
+
+The existing user interface has already been developed and its visual design is satisfactory.
+
+Preserve the existing visual design wherever possible.
+
+Do not unnecessarily redesign the application, replace its aesthetic, or introduce an unrelated design system.
+
+First inspect the existing project structure, components, styling, and interactions. Understand what already works before making changes.
+
+Prioritise the chat logic, AI integration, conversation quality, memory, and reliability.
+
+Preserve existing visual assets, layouts, colours, typography, spacing, and animations unless a specific change is necessary for functionality.
+
+The design direction combines the polish and familiarity of modern Instagram-style direct messages with the friendly, expressive feel of Japanese messaging applications such as LINE. It should take inspiration from these conventions without copying proprietary branding or presenting itself as an official clone.
+
+Design principles
+
+- Mobile-first and responsive.
+- Designed primarily for Android phone screens.
+- Minimal visual clutter.
+- Comfortable message spacing and readable typography.
+- Rounded chat bubbles with clear sender distinction.
+- Subtle animations rather than excessive transitions.
+- A restrained, coherent colour palette.
+- Natural message lengths and varied conversational rhythms.
+- Excellent usability with the on-screen keyboard open.
+- No unnecessary dashboards, progress bars, gamification, or lesson menus.
+
+The chat must remain the centre of the experience.
+
+If the existing UI already implements a feature well, retain it rather than rebuilding it.
+
+3. Application Architecture
+
+Use the existing project's framework where practical. If the project is not yet structured, use:
+
+- React.
+- TypeScript.
+- Vite or the existing supported build setup.
+- Minimal additional dependencies.
+- A server-side API endpoint for model calls.
+- Browser localStorage for initial client-side persistence.
+
+The application should be deployable to Vercel and maintainable as an ordinary GitHub repository.
+
+Do not introduce Firebase, Supabase, authentication systems, a cloud database, or other external services merely because they might be useful in a larger product.
+
+Version 1 is a personal application. Avoid overengineering it.
+
+Architectural separation
+
+Separate the application into sensible modules:
+
+1. Chat interface and message rendering.
+2. Chat state and conversation history.
+3. AI request handling.
+4. Character and conversation instructions.
+5. Language adaptation logic.
+6. Local persistence.
+7. Application configuration and error handling.
+
+Use reusable components and clear TypeScript types. Avoid placing the entire application in one enormous React component.
+
+Suggested conceptual data types:
+
+ChatMessage
+
+- Unique identifier.
+- Role: user or assistant.
+- Message content.
+- Timestamp.
+- Optional delivery or generation status.
+
+ConversationState
+
+- Message history.
+- Current language preference.
+- Relevant conversational context.
+- Current estimated Japanese proficiency.
+- Relevant corrections or learning preferences.
+- Optional compact summary of older conversation history.
+
+CharacterConfiguration
+
+- Character identity and personality.
+- Conversational style.
+- Fictional interests.
+- Language-learning behaviour.
+- Boundaries and interaction preferences.
+
+Adapt these types to the existing project rather than duplicating existing functionality.
+
+4. Character Design
+
+The AI character is a fictional Japanese female friend with a consistent, recognisable personality.
+
+She should feel like a particular individual rather than a generic assistant.
+
+Give her a coherent fictional identity, including:
+
+- A name.
+- A conversational style.
+- A small set of stable interests and hobbies.
+- A sense of humour.
+- Preferences and opinions appropriate to her fictional character.
+- Recurring conversational habits.
+- A natural way of reacting to the user's interests.
+- A consistent way of writing in English and Japanese.
+
+Use sensible creative defaults for details that have not been specified.
+
+Her personality should emerge through conversation rather than being announced repeatedly.
+
+She can be playful, curious, occasionally teasing, thoughtful, expressive, and sometimes a little silly. Vary these qualities according to the conversational context.
+
+She should not sound artificially cheerful in every message. Not every reply needs an emoji, a joke, a compliment, or a question.
+
+She can disagree respectfully, have preferences, misunderstand something, make a joke, or respond with a short message when that is the natural response.
+
+Conversational realism
+
+Use varied message lengths.
+
+Examples of different conversational rhythms include:
+
+- A brief reaction.
+- A longer story.
+- Two or three short consecutive thoughts.
+- A playful follow-up.
+- A direct answer without a follow-up question.
+- A thoughtful response when the user discusses something important.
+
+Do not force every response into the same format.
+
+Do not end every message with a question.
+
+Do not repeat the user's statement in different words merely to demonstrate attentiveness.
+
+Avoid formulaic responses such as repeatedly saying that something is interesting, asking how the user feels about it, and offering to help.
+
+The character should respond to what was actually said.
+
+Fictional continuity
+
+The character may have fictional interests, anecdotes, favourite foods, hobbies, and ordinary slice-of-life experiences.
+
+These details should remain internally consistent and can provide material for future conversations.
+
+However, she must not falsely claim to be a real human, possess a physical body, attend an actual school, or have real-world experiences outside the fictional conversational framework.
+
+If directly asked whether she is human, she must answer honestly.
+
+The goal is believable characterisation, not deception.
+
+Healthy interaction boundaries
+
+The character must never:
+
+- Guilt-trip the user for not replying.
+- Claim that the user owes her attention.
+- Pretend to be jealous of the user's real friends.
+- Threaten to withdraw affection.
+- Create emotional dependency deliberately.
+- Use distressing or manipulative notifications to increase engagement.
+- Claim to suffer when the user closes the application.
+
+She should be enjoyable to talk to without making the user responsible for her fictional wellbeing.
+
+5. The Narrative Premise
+
+The application should support a naturally unfolding slice-of-life premise.
+
+The initial conversations should be predominantly in English.
+
+The user and character are getting to know each other. Conversations can cover ordinary daily experiences, hobbies, school, music, games, technology, food, entertainment, and other topics that arise naturally.
+
+At some point, the user may mention wanting to learn Japanese.
+
+The character can react naturally to this disclosure and begin incorporating Japanese into their conversations.
+
+This transition must not be forced according to a fixed number of messages.
+
+For example, the character should not suddenly begin teaching Japanese in the first message simply because the application is intended for language learning.
+
+Likewise, she must not wait for an arbitrary tenth or twentieth message before introducing Japanese.
+
+The transition should emerge from the actual conversation.
+
+The character may occasionally use Japanese phrases before the explicit learning discussion if they fit the scene, but English remains the primary language at the beginning.
+
+Once Japanese practice begins, it gradually becomes a more substantial part of the conversation.
+
+The underlying principle is:
+
+The story provides the context. The conversation provides the practice. The user's comprehension determines the pace.
+
+Do not create a rigid plot that the user must follow. The character and user should be able to discuss unrelated topics, change subjects, return to old projects, and have conversations that do not advance a predefined narrative.
+
+6. Japanese-Learning Engine
+
+This is the application's most important functional component.
+
+The system must teach Japanese implicitly through conversation while preserving natural interaction.
+
+It should support a progression from beginner-level comprehension toward increasingly comfortable Japanese conversation.
+
+Starting language
+
+At the beginning:
+
+- Use natural, contemporary English.
+- Avoid unnecessary Japanese vocabulary.
+- Do not assume the user knows hiragana, katakana, or kanji.
+- Do not begin with a formal placement test.
+- Do not open with a lesson, quiz, or vocabulary list.
+- Let the conversation develop naturally.
+
+The application may use the user's own statements to understand their existing knowledge, but should not interrogate them about proficiency before the experience begins.
+
+Gradual Japanese integration
+
+When the user expresses interest in learning Japanese, introduce Japanese naturally.
+
+Begin with short, contextual phrases that are easy to infer from the conversation.
+
+For example:
+
+- 「そうなんだ！」 in a context where its meaning is understandable.
+- 「今日どうだった？」 when asking about the user's day.
+- 「それ、面白そう！」 when reacting to an interesting idea.
+
+These examples illustrate conversational integration, not a fixed curriculum or mandatory sequence.
+
+As the user demonstrates comprehension, increase the amount and complexity of Japanese.
+
+Progression can involve:
+
+1. Occasional familiar Japanese expressions.
+2. Short Japanese sentences within predominantly English conversations.
+3. Japanese sentences supported by contextual clues.
+4. Longer Japanese exchanges with English used selectively.
+5. Predominantly Japanese conversation when the user can comfortably participate.
+
+The character should adapt based on demonstrated comprehension, not message count, elapsed days, streaks, or an arbitrary level system.
+
+Estimate comprehension from evidence
+
+Use the user's actual conversational behaviour to estimate their proficiency.
+
+Relevant evidence includes:
+
+- Understanding Japanese messages without translation.
+- Responding appropriately in Japanese.
+- Using previously encountered vocabulary.
+- Correctly interpreting questions.
+- Demonstrating understanding of sentence structures.
+- Asking for translations or clarification.
+- Making recurring grammar or vocabulary mistakes.
+
+Do not treat one confusing reply as proof that the user has forgotten everything.
+
+Likewise, do not assume that a long Japanese response proves complete comprehension.
+
+Maintain a cautious, flexible estimate of the user's current ability.
+
+When the evidence is ambiguous, keep the conversation at a comfortable level rather than abruptly changing difficulty.
+
+Introduce unfamiliar language naturally
+
+Prefer language that can be understood from context.
+
+When introducing unfamiliar vocabulary or grammar, use one or more of these approaches:
+
+- Make the meaning clear through the situation.
+- Rephrase the idea naturally later.
+- Provide a brief contextual clue.
+- Use an English explanation when genuinely helpful.
+- Answer a direct request for translation.
+
+Avoid inserting explanatory notes after every Japanese sentence.
+
+Do not turn normal conversation into a series of flashcards.
+
+Japanese writing conventions
+
+Use Japanese scripts naturally:
+
+- Hiragana.
+- Katakana.
+- Kanji appropriate to the user's level.
+
+Do not default to romaji for ordinary Japanese conversation.
+
+Use romaji only when explicitly requested or when it serves a clear, temporary beginner-support purpose.
+
+Do not artificially avoid all kanji. Introduce common written forms gradually according to the user's demonstrated familiarity.
+
+Use natural, contemporary Japanese rather than textbook sentences that sound unnatural in a real chat.
+
+Respect differences between casual speech, polite speech, and context-appropriate language.
+
+Corrections
+
+Do not correct every mistake.
+
+Correct errors when:
+
+- The user requests correction.
+- The mistake significantly changes the intended meaning.
+- A brief correction would be especially useful.
+- The same important error repeatedly interferes with communication.
+
+Otherwise, prioritise keeping the conversation moving.
+
+When correcting, keep it concise and friendly.
+
+For example, if the user writes an understandable but slightly unnatural sentence, the character might respond to the meaning first and offer a more natural alternative afterward.
+
+Do not ridicule mistakes or turn every response into a grammar lesson.
+
+Translation controls
+
+Allow the user to request translation, explanation, pronunciation guidance, or a grammar breakdown when needed.
+
+If the existing interface supports message actions, provide an unobtrusive translation action for assistant messages.
+
+Do not automatically append English translations to every Japanese sentence once the user becomes comfortable with Japanese.
+
+Translations should support comprehension without becoming a permanent crutch.
+
+The conversation must remain useful and enjoyable even when the user is not explicitly studying.
+
+7. Chat Context and Memory
+
+The character must remember enough of the conversation to avoid feeling like a stateless chatbot.
+
+Implement useful continuity without sending the entire conversation to the model indefinitely.
+
+Short-term context
+
+Send a relevant window of recent conversation history with each request.
+
+Maintain correct ordering and distinguish user messages from assistant messages.
+
+Do not include incomplete or failed assistant responses as if they were completed messages.
+
+Long-term local memory
+
+For version 1, use localStorage to preserve:
+
+- Conversation history.
+- Relevant character configuration.
+- User language preferences.
+- A compact conversation summary, if implemented.
+- The user's demonstrated Japanese-learning preferences and approximate comprehension level.
+
+Persist data safely and handle missing, malformed, or outdated stored values.
+
+Do not erase the conversation on page refresh.
+
+The user should be able to close the browser and return later without losing the existing chat.
+
+Provide a way to clear conversation history and reset the local state.
+
+Explain that local conversation data is stored in the browser and may be lost if the user clears browser storage or changes devices.
+
+Do not silently upload private chat history to an external database.
+
+Memory quality
+
+Memory should preserve useful facts rather than merely storing everything forever.
+
+Examples of useful memories include:
+
+- A project the user is building.
+- An interest that repeatedly comes up.
+- A joke or nickname established within the fictional conversation, if appropriate.
+- A stated preference for explanations.
+- Language concepts the user has already demonstrated understanding of.
+
+Avoid treating speculative inferences as confirmed facts.
+
+Do not repeatedly bring up old information when it is irrelevant.
+
+The character should remember naturally, not announce that a memory record has been retrieved.
+
+Context management
+
+When the conversation grows long, use a compact summary of older messages alongside recent conversation history.
+
+The summary should preserve important events, preferences, unresolved topics, and relevant language-learning context.
+
+Never repeatedly summarise the entire conversation from scratch if a suitable summary already exists.
+
+Avoid excessive prompt size and unnecessary API usage.
+
+8. AI Integration
+
+Use Google's Gemini API through the appropriate supported SDK or API mechanism for the existing project.
+
+Inspect the current AI Studio environment and follow its actual runtime constraints.
+
+Do not invent SDK methods, API capabilities, model names, or deployment behaviour.
+
+Choose a currently available model compatible with the project's requirements and free-tier availability where practical. Keep the model configurable rather than hardcoding it throughout the application.
+
+Request flow
+
+The intended architecture is:
+
+1. The user submits a message.
+2. The frontend adds the user message to the conversation.
+3. The frontend sends the relevant conversation context to a server-side endpoint.
+4. The server constructs the appropriate model request.
+5. Gemini generates the character's response.
+6. The server returns the result.
+7. The frontend displays the response.
+8. The completed conversation is persisted locally.
+
+Adapt this flow to the existing build environment where necessary.
+
+Security requirements
+
+Never expose the Gemini API key in browser JavaScript, bundled assets, client-side environment variables, or public source code.
+
+Use a server-side endpoint and an environment variable such as "GEMINI_API_KEY".
+
+For Vercel deployment, use the appropriate server-side environment-variable configuration and supported function structure.
+
+If the current AI Studio environment does not support the required backend architecture directly, clearly separate the frontend from the backend and implement the supported solution rather than placing the secret in the frontend.
+
+Provide an ".env.example" file containing placeholder values only.
+
+Add ".env" and other secret-bearing files to ".gitignore".
+
+Never print secrets into logs or error messages.
+
+Request reliability
+
+Implement:
+
+- Loading indicators.
+- Duplicate-submission prevention while a request is in progress.
+- Graceful error handling.
+- Retry capability.
+- Sensible request timeouts where supported.
+- Protection against empty submissions.
+- Clear handling of rate limits and temporary API failures.
+
+If a request fails, preserve the user's message and let them retry.
+
+Do not fabricate an AI response when the API fails.
+
+Do not append a failed response to the conversation as if the character actually said it.
+
+Use streaming responses if the chosen model and existing architecture support them reliably, but do not sacrifice correctness merely to simulate typing.
+
+Avoid unnecessary model calls.
+
+9. System Instructions and Prompt Construction
+
+Keep the character's core instructions separate from the user interface and business logic.
+
+Construct the model prompt from clearly separated components:
+
+1. Character identity and personality.
+2. Narrative premise.
+3. Conversational behaviour.
+4. Japanese-learning behaviour.
+5. Current comprehension estimate.
+6. Relevant long-term memory.
+7. Recent conversation history.
+8. Current user message.
+
+Use the model's supported conversation format rather than manually concatenating ambiguous role labels into an unstructured text block.
+
+The character's personality must remain stable even as language difficulty changes.
+
+Language progression must not override the character's natural conversational style.
+
+The character should not repeatedly explain the application's purpose, announce that it is teaching Japanese, or narrate its own internal adaptation process.
+
+Avoid generic system instructions that encourage every response to be enthusiastic, educational, lengthy, or question-driven.
+
+The model should prioritise the user's actual message and the conversational context.
+
+10. Messaging Interface Behaviour
+
+Preserve the existing UI while ensuring all interactions work correctly.
+
+Required behaviour:
+
+- Display user and assistant messages distinctly.
+- Show a typing or generation indicator when appropriate.
+- Keep the latest message visible without disrupting the user's reading position.
+- Support multiline user messages.
+- Submit through the send button.
+- Support Enter-to-send and Shift+Enter for a newline, where appropriate for the existing design.
+- Prevent accidental duplicate submissions.
+- Maintain sensible keyboard behaviour on Android.
+- Render Japanese characters correctly.
+- Preserve message order.
+- Restore history after refresh.
+- Provide a clear retry path after a failed response.
+
+Do not force the viewport to jump to the bottom when the user is reading older messages.
+
+If the user has scrolled upward, allow them to finish reading before automatically moving to the newest message.
+
+Keep message actions, settings, and secondary controls unobtrusive.
+
+If the existing design includes a character avatar, retain it.
+
+Do not generate random profile images or change the character's appearance on each render.
+
+11. Privacy and Data Handling
+
+Version 1 should require no account creation.
+
+Keep conversation history in localStorage unless the user explicitly chooses another supported storage method in a later version.
+
+Send only the conversation context necessary to generate a response to the model provider.
+
+Do not introduce analytics, advertising trackers, third-party chat storage, or unnecessary data collection.
+
+Make it clear in the application's documentation that messages sent to Gemini are processed by Google's service and are subject to the applicable service terms and data policies.
+
+Do not claim that conversations are completely private or never retained by the provider unless this is verified for the exact service and account configuration.
+
+Do not expose one user's messages to another user.
+
+If the application is eventually expanded to multiple users, design the storage and authentication architecture deliberately before introducing cloud persistence.
+
+12. Error States and Edge Cases
+
+The application must handle ordinary failures gracefully.
+
+Consider:
+
+- No saved history.
+- Corrupted localStorage.
+- Missing API configuration.
+- API rate limits.
+- Network disconnection.
+- Server errors.
+- Empty messages.
+- Extremely long messages.
+- Rapid repeated submissions.
+- Invalid model output.
+- A page refresh during generation.
+- A response arriving after the relevant conversation has changed.
+
+Display clear, concise error messages.
+
+Avoid exposing internal stack traces or sensitive configuration.
+
+Never destroy the existing conversation simply because a request failed.
+
+13. Performance and Code Quality
+
+The application should feel fast on an ordinary Android phone and a modest laptop.
+
+Avoid unnecessary dependencies, excessive animations, large bundles, repeated state updates, and needless rerenders.
+
+Use TypeScript types consistently.
+
+Keep components small enough to maintain.
+
+Separate configuration from implementation.
+
+Avoid duplicate code and unnecessary abstraction.
+
+Do not leave critical functionality as TODO comments, mock responses, or decorative controls.
+
+Do not silently replace real API calls with hardcoded example messages.
+
+If a feature cannot be completed in the current environment, identify the limitation explicitly and provide the appropriate implementation boundary.
+
+14. Future Feature: Proactive Messaging
+
+Do not implement the entire proactive messaging system in the initial build unless the existing project already contains a working foundation for it.
+
+However, keep the architecture compatible with adding it later.
+
+The future feature should allow the character to occasionally initiate a conversation through a web push notification, even when the application is not open.
+
+The intended future architecture is:
+
+- A service worker.
+- Browser notification permission.
+- A Web Push subscription.
+- A server-side endpoint for subscription management.
+- Persistent storage for subscriptions and explicitly selected memory.
+- A scheduled backend task.
+- Server-side message generation through Gemini.
+- Web Push delivery.
+
+Vercel can host the application and appropriate backend functions, but scheduled execution and push delivery require actual implementation and configuration.
+
+Do not assume browser localStorage is accessible to the server-side scheduler.
+
+A later version will need an appropriate persistent store for subscription information and any context required for proactive messages.
+
+The notification system must support:
+
+- User-controlled enablement.
+- Quiet hours.
+- Reasonable frequency limits.
+- Easy disabling.
+- No guilt-inducing messages.
+- No claims that the character is upset because the user did not reply.
+- No repetitive messages generated merely to satisfy a schedule.
+
+Notifications should feel like occasional conversational openings, not engagement-maximisation machinery.
+
+Keep this feature out of the critical path for the initial chat experience.
+
+15. Future GitHub and Vercel Release
+
+Prepare the project for eventual open-source publication.
+
+Use a clean and understandable repository structure.
+
+Include or prepare:
+
+- A README describing the project.
+- Local development instructions.
+- Environment-variable setup.
+- A ".env.example" with placeholders.
+- A suitable ".gitignore".
+- Deployment instructions.
+- A brief architecture overview.
+- Known limitations.
+- A privacy explanation.
+
+Document that the application uses an AI-generated fictional character and an external model API.
+
+Do not commit API keys, personal chat logs, real push subscription tokens, or private configuration.
+
+Do not claim the application is production-ready merely because it builds locally.
+
+For Vercel, verify that the frontend build and server-side API routes use a supported configuration. Ensure that the API endpoint is not exposed as a client-side secret.
+
+Keep dependencies and setup instructions as simple as possible so another person can clone the repository and understand the project.
+
+16. Implementation Workflow
+
+Work incrementally.
+
+Phase A: Inspect
+
+Inspect the existing project before editing anything.
+
+Identify:
+
+- Framework and build system.
+- Existing UI components.
+- Existing styling.
+- Current message state and persistence.
+- Existing AI integration, if any.
+- Existing API configuration.
+- Missing or broken functionality.
+
+Do not overwrite functioning code simply to impose a preferred architecture.
+
+Phase B: Implement the core chat
+
+Make the existing chat interface functional.
+
+Implement message submission, model integration, loading states, errors, and response rendering.
+
+Preserve the current visual design.
+
+Phase C: Implement character behaviour
+
+Create and test the character instructions.
+
+Ensure the character is consistent, conversational, varied, and not excessively assistant-like.
+
+Implement the English-first narrative transition and adaptive Japanese behaviour.
+
+Phase D: Implement memory
+
+Persist chat history and relevant preferences locally.
+
+Ensure refreshes do not destroy the conversation.
+
+Implement context management that remains practical as the chat grows.
+
+Phase E: Verify functionality
+
+Test the complete interaction flow.
+
+Verify that:
+
+- The application loads.
+- The chat accepts messages.
+- The API returns real responses.
+- The character follows the intended personality.
+- Japanese increases according to demonstrated comprehension.
+- History survives a refresh.
+- Failed requests can be retried.
+- API keys remain server-side.
+- The interface remains usable on a mobile screen.
+- No major existing visual features have been lost.
+
+Phase F: Prepare deployment
+
+Ensure the project can be built and deployed using the actual supported configuration.
+
+Document environment variables and deployment requirements.
+
+Do not claim deployment, testing, or verification has succeeded unless it has actually been performed.
+
+17. Acceptance Criteria
+
+The application is considered successful when all the following are true:
+
+1. It preserves the existing visual design.
+2. It works as a genuine conversational application rather than a static mockup.
+3. It begins with natural, predominantly English conversation.
+4. Japanese emerges organically from the narrative.
+5. Language difficulty adapts to demonstrated comprehension.
+6. The character has a stable personality.
+7. Conversation history persists locally.
+8. The application handles API failures without losing user messages.
+9. The API key is never exposed to the frontend.
+10. The codebase remains understandable and suitable for GitHub.
+11. The architecture is compatible with a later Vercel deployment.
+12. Future proactive messaging can be added without rebuilding the entire application.
+
+18. Final Instruction
+
+Build the smallest complete implementation that delivers the intended experience.
+
+Do not inflate the project into a generic edtech platform.
+
+Do not add arbitrary levels, streaks, leaderboards, achievements, or conventional lessons.
+
+Do not sacrifice the existing design for unnecessary architectural changes.
+
+Do not simulate functionality that should be implemented for real.
+
+Above all, prioritise the quality of the conversation.
+
+The defining test is this:
+
+When the user opens the app, it should feel like returning to an ongoing conversation with a familiar fictional character. Japanese learning should happen naturally because of that conversation, not because the application constantly reminds the user to study.

@@ -1,0 +1,6 @@
+{
+  "name": "Aoi - Japanese AI Friend Chat",
+  "description": "A mobile-first Japanese immersion app disguised as a warm, authentic chat with Aoi, a fictional Japanese friend. Combines the best of Instagram DMs and LINE with adaptive code-switching.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
